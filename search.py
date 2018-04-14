@@ -173,7 +173,7 @@ def searchTree(playerA, playerB, pattern, size, level, parent):
     moves = getNextMove(playerA, pattern, size)
     for i, move in enumerate(moves):
         if level < 2:
-            print '  ' * level * 2 + '正在尝试', i, '/', len(moves)
+            print( '  ' * level * 2 + '正在尝试', i, '/', len(moves))
         newPlayerA = copy.deepcopy(playerA)
         removeElements(newPlayerA, move['c'])
         count += 1
@@ -189,7 +189,7 @@ def searchTree(playerA, playerB, pattern, size, level, parent):
             moves_ = getNextMove(playerB, move['p'], move['s'])
             for j, move_ in enumerate(moves_):
                 if level < 2:
-                    print '  ' * (level * 2 + 1) + '正在尝试', j, '/', len(moves_)
+                    print ('  ' * (level * 2 + 1) + '正在尝试', j, '/', len(moves_))
                 newPlayerB = copy.deepcopy(playerB)
                 removeElements(newPlayerB, move_['c'])
                 count += 1
@@ -208,8 +208,8 @@ def searchTree(playerA, playerB, pattern, size, level, parent):
     return 0
 
 # 主体
-playerAStr = raw_input('请输入地主牌：')
-playerBStr = raw_input('请输入农民牌：')
+playerAStr = input('请输入地主牌：')
+playerBStr = input('请输入农民牌：')
 playerA = playerAStr.split()
 playerB = playerBStr.split()
 
@@ -219,15 +219,15 @@ getVal(playerB)
 
 # 搜索对抗树
 if searchTree(playerA, playerB, -1, -1, 0, root):
-    print '完成！'
+    print('完成！')
     flag = 1
     while flag:
         flag = 0
         for node in tree[root][2]:
             if tree[node][0] == 1:
-                print '地主应出', getCard(tree[node][1])
+                print ('地主应出', getCard(tree[node][1]))
                 root = node
-                moveStr = raw_input('请输入农民的出牌：')
+                moveStr = input('请输入农民的出牌：')
                 move = moveStr.split()
                 getVal(move)
                 for node_ in tree[root][2]:
@@ -237,4 +237,4 @@ if searchTree(playerA, playerB, -1, -1, 0, root):
                 flag = 1
                 break
 else:
-    print '失败！'
+    print('失败！')
