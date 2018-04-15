@@ -39,8 +39,10 @@ def getSeq(cards, length, size, num):
             if ((len(seq) == 0 and card > size and card < 12 and cards.count(card) >= num) or
                 (len(seq) != 0 and seq[-1] + 1 == card and card < 12 and cards.count(card) >= num)):
                 seq = seq + [card] * num
-            else:
+            elif(cards.count(card) >= num and card > size):
                 seq = [card]
+            else:
+                seq = []
             if len(seq) == length * num:
                 pattern = -1
                 if num == 1:
@@ -173,7 +175,7 @@ def searchTree(playerA, playerB, pattern, size, level, parent):
     moves = getNextMove(playerA, pattern, size)
     for i, move in enumerate(moves):
         if level < 2:
-            print( '  ' * level * 2 + '正在尝试', i, '/', len(moves))
+            print ('  ' * level * 2 + '正在尝试', i, '/', len(moves))
         newPlayerA = copy.deepcopy(playerA)
         removeElements(newPlayerA, move['c'])
         count += 1
@@ -219,7 +221,7 @@ getVal(playerB)
 
 # 搜索对抗树
 if searchTree(playerA, playerB, -1, -1, 0, root):
-    print('完成！')
+    print ('完成！')
     flag = 1
     while flag:
         flag = 0
@@ -237,4 +239,4 @@ if searchTree(playerA, playerB, -1, -1, 0, root):
                 flag = 1
                 break
 else:
-    print('失败！')
+    print ('失败！')
